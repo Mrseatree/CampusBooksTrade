@@ -1,4 +1,4 @@
-package com.Books.common.mybatisplus.result;
+package com.Books.common.result;
 
 import lombok.Data;
 
