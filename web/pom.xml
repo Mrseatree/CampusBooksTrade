@@ -23,6 +23,12 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.Books</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
         <!--包含spring web相关依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
