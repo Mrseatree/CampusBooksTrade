@@ -38,4 +38,8 @@ public class User implements Serializable {
     @Schema(description = "注册时间")
     @TableField
     private Date registerDate;
+
+    @Schema(description = "头像")
+    @TableField
+    private String avatar_url;
 }
