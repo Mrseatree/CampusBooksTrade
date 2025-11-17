@@ -3,12 +3,11 @@ package com.Books.model.enums;
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import java.io.Serializable;
-
 public enum NeedStatus implements BaseEnum{
 
-    SOLVED(0,"已解决"),
-    LOOK_FOR(1,"未解决");
+    PUBLIC(0,"已发布"),
+    CANCELED(-1,"已取消");
+
 
     @EnumValue
     @JsonValue

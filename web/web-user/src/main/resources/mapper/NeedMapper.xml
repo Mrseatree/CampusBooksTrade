@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Books.web.app.mapper.NeedMapper">
+
+    <!-- 映射 NeedItemVo -->
+    <resultMap id="NeedItemVoMap" type="com.Books.web.app.vo.NeedItemVo">
+
+        <!-- NeedItemVo 自身字段 -->
+        <result column="region_name" property="regionName"/>
+        <result column="title" property="title"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+
+        <!-- UserVo -->
+        <association property="userVo" javaType="com.Books.web.app.vo.UserVo">
+            <result column="user_name" property="name"/>
+            <result column="avatar_url" property="avatarUrl"/>
+        </association>
+
+        <!-- GraphVo（封面图） -->
+        <association property="graphVo" javaType="com.Books.web.app.vo.GraphVo">
+            <result column="graph_name" property="name"/>
+            <result column="graph_url" property="url"/>
+        </association>
+
+    </resultMap>
+
+    <select id="getItemListById" resultType="com.Books.web.app.vo.NeedItemVo">
+        SELECT
+            n.title,
+            n.status,
+            n.create_time,
+
+            -- region
+            r.region_name,
+
+            -- user
+            u.name AS user_name,
+            u.avatar_url,
+
+            -- graph
+            g.name AS graph_name,
+            g.url  AS graph_url
+
+        FROM book_need n
+        LEFT JOIN user u ON n.user_id = u.id
+        LEFT JOIN region r ON n.region_id = r.id
+        LEFT JOIN graph g ON g.need_id = n.id AND g.is_cover=1 -- 如果是一对一封面图
+
+        WHERE n.user_id = #{userId}
+        ORDER BY n.create_time DESC
+    </select>
+
+</mapper>

@@ -27,9 +27,9 @@ public class BookNeed extends BaseEntity {
     @TableField
     private String title;
 
-    @Schema
-    @TableField
-    private String author;
+//    @Schema
+//    @TableField
+//    private String author;
 
     @Schema
     @TableField
@@ -38,6 +38,10 @@ public class BookNeed extends BaseEntity {
     @Schema
     @TableField
     private NeedStatus status;
+
+    @Schema
+    @TableField
+    private String createTime;
 
 
 
