@@ -42,7 +42,20 @@ public class NeedServiceImpl extends ServiceImpl<NeedMapper,BookNeed>
     private UserService userService;
 
     @Override
-    public void removeNeedById(String id) {
+    public void updateNeed(BookNeed bookNeed){
+        Long id=bookNeed.getId();
+        LambdaQueryWrapper<BookService> queryWrapper=new LambdaQueryWrapper<>();
+        queryWrapper.eq(BookService::getNeedId, id);
+        Long count=serviceMapper.selectCount(queryWrapper);
+        if(count>0)
+        {
+            throw new BookException(ResultCodeEnum.NEED_HAS_SERVICE);
+        }
+        this.updateById(bookNeed);
+    }
+
+    @Override
+    public void removeNeedById(Long id) {
         BookNeed bookNeed = this.getById(id);
         if(bookNeed.getStatus()!=NeedStatus.PUBLIC){
             throw new BookException(ResultCodeEnum.NEED_DOES_NOT_PUBLIC);
@@ -62,13 +75,13 @@ public class NeedServiceImpl extends ServiceImpl<NeedMapper,BookNeed>
     }
 
     @Override
-    public NeedDetailVo getDetailById(String id) {
+    public NeedDetailVo getDetailById(Long id) {
         //获取我需要信息
         BookNeed bookNeed = needMapper.selectById(id);
 
         //ToDo:User的服务需提供一个根据用户id返回头像及昵称的接口
         //获取用户昵称及头像
-        String userId=bookNeed.getUserId();
+        Long userId=bookNeed.getUserId();
         UserVo userVo = new UserVo();
 
         //ToDo:图片模块需提供一个根据我服务id返回相关图片列表的接口
@@ -80,7 +93,7 @@ public class NeedServiceImpl extends ServiceImpl<NeedMapper,BookNeed>
         List<ServiceVo>serviceVoList=new ArrayList<ServiceVo>();
 
         //根据地区id查询地区名称
-        String regionId=bookNeed.getRegionId();
+        Long regionId=bookNeed.getRegionId();
         String regionName=regionService.getRegionName(regionId);
 
         //组装
@@ -95,7 +108,12 @@ public class NeedServiceImpl extends ServiceImpl<NeedMapper,BookNeed>
     }
 
     @Override
-    public IPage<NeedItemVo> getItemListById(Page<NeedItemVo>page,String userId) {
+    public IPage<NeedItemVo> getItemListById(Page<NeedItemVo>page,Long userId) {
         return needMapper.getItemListById(page,userId);
+    }
+
+    @Override
+    public IPage<NeedItemVo> getNeedList(Page<NeedItemVo> page, NeedItemQueryVo queryVo) {
+        return needMapper.getNeedList(page,queryVo);
     }
 }

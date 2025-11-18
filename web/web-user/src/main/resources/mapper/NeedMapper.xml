@@ -27,7 +27,7 @@
 
     </resultMap>
 
-    <select id="getItemListById" resultType="com.Books.web.app.vo.NeedItemVo">
+    <select id="getItemListById" resultMap="NeedItemVoMap">
         SELECT
             n.title,
             n.status,
@@ -50,6 +50,56 @@
         LEFT JOIN graph g ON g.need_id = n.id AND g.is_cover=1 -- 如果是一对一封面图
 
         WHERE n.user_id = #{userId}
+        ORDER BY n.create_time DESC
+    </select>
+
+    <select id="getNeedList" resultMap="NeedItemVoMap">
+        SELECT
+        -- 需求基本信息
+        n.title,
+        n.status,
+        n.create_time,
+
+        -- 用户信息
+        u.name AS user_name,
+        u.url AS avatar_url,
+
+        -- 地区信息（拼接省/市/区）
+        CONCAT(
+        p.name, ' ',
+        c.name, ' ',
+        a.name
+        ) AS regionName,
+
+        -- 图片封面
+        g.url AS graph_url,
+        g.name AS graph_name
+
+        FROM book_need n
+        LEFT JOIN user u ON u.id = n.user_id
+        LEFT JOIN region p ON p.id = n.province_id
+        LEFT JOIN region c ON c.id = n.city_id
+        LEFT JOIN region a ON a.id = n.area_id
+        LEFT JOIN graph g ON g.need_id = n.id
+
+        <where>
+            <if test="provinceId != null">
+                AND n.province_id = #{provinceId}
+            </if>
+            <if test="cityId != null">
+                AND n.city_id = #{cityId}
+            </if>
+            <if test="areaId != null">
+                AND n.area_id = #{areaId}
+            </if>
+            <if test="status != null">
+                AND n.status = #{status}
+            </if>
+            <if test="keyword != null and keyword != ''">
+                AND n.title LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+        </where>
+
         ORDER BY n.create_time DESC
     </select>
 

@@ -15,34 +15,32 @@ import java.io.Serializable;
 public class BookNeed extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
-    @Schema
+    @Schema(description = "用户ID")
     @TableField
-    private String userId;
+    private Long userId;
 
-    @Schema
+    @Schema(description = "省ID")
     @TableField
-    private String regionId;
+    private Long provinceId;
 
-    @Schema
+    @Schema(description = "市ID")
+    @TableField
+    private Long cityId;
+
+    @Schema(description = "区ID")
+    @TableField
+    private Long areaId;
+
+    @Schema(description = "标题")
     @TableField
     private String title;
 
-//    @Schema
-//    @TableField
-//    private String author;
-
-    @Schema
+    @Schema(description = "描述")
     @TableField
     private String description;
 
-    @Schema
+    @Schema(description = "状态")
     @TableField
     private NeedStatus status;
-
-    @Schema
-    @TableField
-    private String createTime;
-
-
 
 }
