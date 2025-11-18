@@ -13,7 +13,7 @@ implements RegionService {
     private RegionMapper regionMapper;
 
     @Override
-    public String getRegionName(String id) {
+    public String getRegionName(Long id) {
         Region region = regionMapper.selectById(id);
         return region.getName();
     }

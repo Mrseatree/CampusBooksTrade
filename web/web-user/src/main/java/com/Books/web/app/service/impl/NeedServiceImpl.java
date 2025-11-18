@@ -93,8 +93,13 @@ public class NeedServiceImpl extends ServiceImpl<NeedMapper,BookNeed>
         List<ServiceVo>serviceVoList=new ArrayList<ServiceVo>();
 
         //根据地区id查询地区名称
-        Long regionId=bookNeed.getRegionId();
-        String regionName=regionService.getRegionName(regionId);
+        Long provinceId=bookNeed.getProvinceId();
+        Long areaId=bookNeed.getAreaId();
+        Long cityId=bookNeed.getCityId();
+        String proviceName=regionService.getRegionName(provinceId);
+        String areaName=regionService.getRegionName(areaId);
+        String cityName=regionService.getRegionName(cityId);
+        String regionName=proviceName+areaName+cityName;
 
         //组装
         NeedDetailVo needDetailVo=new NeedDetailVo();
