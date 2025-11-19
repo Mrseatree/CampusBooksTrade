@@ -14,7 +14,7 @@ import java.util.Date;
 @Schema(description = "用户及管理员信息")
 @TableName(value = "user")
 @Data
-public class User implements Serializable {
+public class User extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 //    @TableId(type = IdType.AUTO)
 //    private Long id;
