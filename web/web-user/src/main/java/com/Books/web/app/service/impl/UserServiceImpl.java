@@ -14,12 +14,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     private UserMapper userMapper;
 
     @Override
-    public void updateUserInfo(Long id, String name, String password, String description, String phoneNumber) {
+    public void updateUserInfo(Long id, String password, String description, String phoneNumber) {
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(User::getId, id);
         User user = userMapper.selectOne(queryWrapper);
         user.setPassword(password);
-        user.setUsername(name);
         user.setPhone(phoneNumber);
         user.setDescription(description);
         userMapper.updateById(user);

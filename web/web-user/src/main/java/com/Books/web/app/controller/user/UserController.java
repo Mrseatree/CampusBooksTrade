@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -22,8 +23,12 @@ public class UserController {
 
     @Operation(summary="修改个人信息",description = "修改个人信息")
     @PostMapping("update")
-    public Result updateUserInfo(Long id,String name,String password,String description,String phoneNumber) {
-        userService.updateUserInfo(id,name,password,description,phoneNumber);
+    public Result updateUserInfo(
+            @RequestParam Long userId,
+            @RequestParam String password,
+            @RequestParam String introduction,
+            @RequestParam String phoneNumber) {
+        userService.updateUserInfo(userId,password,introduction,phoneNumber);
         return Result.ok();
     }
 }
