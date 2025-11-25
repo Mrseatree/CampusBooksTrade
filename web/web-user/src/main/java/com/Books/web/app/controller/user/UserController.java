@@ -31,4 +31,14 @@ public class UserController {
         userService.updateUserInfo(userId,password,introduction,phoneNumber);
         return Result.ok();
     }
+
+    @Operation(summary = "查找用户信息",description = "根据用户id查找用户信息")
+    @PostMapping("get")
+    public Result getUserInfo(@RequestParam Long userId) {
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(User::getId, userId);
+        User user = userService.getOne(queryWrapper);
+        return Result.ok(user);
+    }
+
 }

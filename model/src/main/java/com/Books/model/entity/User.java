@@ -33,7 +33,7 @@ public class User extends BaseEntity implements Serializable {
 
     @Schema(description = "简介")
     @TableField
-    private String description;
+    private String introduction;
 
     @Schema(description = "用户类型")
     @TableField

@@ -20,7 +20,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         User user = userMapper.selectOne(queryWrapper);
         user.setPassword(password);
         user.setPhone(phoneNumber);
-        user.setDescription(description);
+        user.setIntroduction(description);
         userMapper.updateById(user);
     }
 }
