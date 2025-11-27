@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -25,6 +27,7 @@ public class User extends BaseEntity implements Serializable {
 
     @Schema(description = "密码")
     @TableField
+    @JsonIgnore
     private String password;
 
     @Schema(description = "电话号码")
@@ -45,5 +48,7 @@ public class User extends BaseEntity implements Serializable {
 
     @Schema(description = "头像")
     @TableField
-    private String avatar_url;
+    @JsonProperty("avatar_url")
+    private String avatarUrl;
+
 }
