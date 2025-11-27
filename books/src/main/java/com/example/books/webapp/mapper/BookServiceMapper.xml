@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.books.webapp.mapper.BookServiceMapper">
+    <!--
+        由于示例项目使用内存存储，此处仅保留 Mapper 占位符。
+        若接入数据库，可在此定义 CRUD 语句。
+    -->
+</mapper>
+
