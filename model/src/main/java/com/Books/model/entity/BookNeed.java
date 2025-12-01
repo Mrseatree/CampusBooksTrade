@@ -27,9 +27,9 @@ public class BookNeed extends BaseEntity {
     @TableField
     private Long cityId;
 
-    @Schema(description = "区ID")
-    @TableField
-    private Long areaId;
+//    @Schema(description = "区ID")
+//    @TableField
+//    private Long areaId;
 
     @Schema(description = "标题")
     @TableField

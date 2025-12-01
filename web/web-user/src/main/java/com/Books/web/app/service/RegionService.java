@@ -6,4 +6,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface RegionService extends IService<Region> {
 
     public String getRegionName(Long id);
+
+    Region parseRegion(String region);
 }
